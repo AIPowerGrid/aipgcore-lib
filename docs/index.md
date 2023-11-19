@@ -37,7 +37,7 @@ Some functionality is implemented as a module that can be installed separately:
 
 * [Payment Protocol Support](https://github.com/AIPowerGrid/aipgcore-payment-protocol)
 * [Peer to Peer Networking](https://github.com/AIPowerGrid/aipgcore-p2p)
-* [aipgcoin Core JSON-RPC](https://github.com/underdarkskies/aipgd-rpc)
+* [aipgcoin Core JSON-RPC](https://github.com/AIPowerGrid/aipgd-rpc)
 * [Payment Channels](https://github.com/AIPowerGrid/aipgcore-channel)
 * [Mnemonics](https://github.com/AIPowerGrid/aipgcore-mnemonic)
 * [Elliptical Curve Integrated Encryption Scheme](https://github.com/AIPowerGrid/aipgcore-ecies)
