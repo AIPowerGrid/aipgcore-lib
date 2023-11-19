@@ -1,13 +1,13 @@
 # Unit
-Unit is a utility for handling and converting ravencoin units. We strongly recommend to always use satoshis to represent amount inside your application and only convert them to other units in the front-end.
+Unit is a utility for handling and converting aipgcoin units. We strongly recommend to always use satoshis to represent amount inside your application and only convert them to other units in the front-end.
 
 To understand the need of using the `Unit` class when dealing with unit conversions, see this example:
 
 ```
 > 81.99 * 100000 // wrong
 8198999.999999999
-> var ravencore = require('ravencore');
-> var Unit = ravencore.Unit;
+> var aipgcore = require('aipgcore');
+> var Unit = aipgcore.Unit;
 > Unit.fromMilis(81.99).toSatoshis() // correct
 8199000
 ```

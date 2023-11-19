@@ -1,8 +1,8 @@
-# Ravencoin Address
-Represents a ravencoin address. Addresses are the most popular way to make ravencoin transactions. See [the official Bitcoin Wiki](https://en.bitcoin.it/wiki/Address) for technical background information.
+# aipgcoin Address
+Represents a aipgcoin address. Addresses are the most popular way to make aipgcoin transactions. See [the official Bitcoin Wiki](https://en.bitcoin.it/wiki/Address) for technical background information.
 
 ## Instantiate an Address
-To be able to receive ravencoins an address is needed, but in order to spend them a private key is necessary. Please take a look at the [`PrivateKey`](privatekey.md) docs for more information about exporting and saving a key.  
+To be able to receive aipgcoins an address is needed, but in order to spend them a private key is necessary. Please take a look at the [`PrivateKey`](privatekey.md) docs for more information about exporting and saving a key.  
 
 ```javascript
 var privateKey = new PrivateKey();
@@ -34,7 +34,7 @@ var p2shAddress = new Address([publicKey1, publicKey2, publicKey3], 2);
 ```
 
 ## Validating an Address
-The main use that we expect you'll have for the `Address` class in ravencore is validating that an address is a valid one, what type of address it is (you may be interested on knowing if the address is a simple "pay to public key hash" address or a "pay to script hash" address) and what network does the address belong to.
+The main use that we expect you'll have for the `Address` class in aipgcore is validating that an address is a valid one, what type of address it is (you may be interested on knowing if the address is a simple "pay to public key hash" address or a "pay to script hash" address) and what network does the address belong to.
 
 The code to do these validations looks like this:
 
@@ -62,4 +62,4 @@ var error = Address.getValidationError(input, Networks.testnet);
 }
 ```
 
-The errors are listed in the generated file in the [errors folder](https://github.com/underdarkskies/ravencore/tree/master/lib/errors). There's a structure to errors defined in the [spec.js file](https://github.com/underdarkskies/ravencore/tree/master/lib/errors/spec.js).
+The errors are listed in the generated file in the [errors folder](https://github.com/AIPowerGrid/aipgcore/tree/master/lib/errors). There's a structure to errors defined in the [spec.js file](https://github.com/AIPowerGrid/aipgcore/tree/master/lib/errors/spec.js).

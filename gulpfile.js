@@ -1,5 +1,5 @@
 
 
-var ravencoreTasks = require('ravencore-build');
+var aipgcoreTasks = require('aipgcore-build');
 
-ravencoreTasks('lib');
+aipgcoreTasks('lib');

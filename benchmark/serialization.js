@@ -1,7 +1,7 @@
 'use strict';
 
 var benchmark = require('benchmark');
-var ravencore = require('..');
+var aipgcore = require('..');
 var bitcoinjs = require('bitcoinjs-lib');
 var bcoin = require('bcoin');
 var async = require('async');
@@ -22,13 +22,13 @@ async.series([
     for (var i = 0; i < 100; i++) {
 
       // uint64le
-      var br = new ravencore.encoding.BufferWriter();
+      var br = new aipgcore.encoding.BufferWriter();
       var num = Math.round(Math.random() * 10000000000000);
-      br.writeUInt64LEBN(new ravencore.crypto.BN(num));
+      br.writeUInt64LEBN(new aipgcore.crypto.BN(num));
       buffers.push(br.toBuffer());
 
       // hashes
-      var data = ravencore.crypto.Hash.sha256sha256(new Buffer(32));
+      var data = aipgcore.crypto.Hash.sha256sha256(new Buffer(32));
       hashBuffers.push(data);
     }
 
@@ -40,7 +40,7 @@ async.series([
         c = 0;
       }
       var buf = buffers[c];
-      var br = new ravencore.encoding.BufferReader(buf);
+      var br = new aipgcore.encoding.BufferReader(buf);
       bn = br.readUInt64LEBN();
       c++;
     }
@@ -52,7 +52,7 @@ async.series([
         c = 0;
       }
       var buf = hashBuffers[c];
-      var br = new ravencore.encoding.BufferReader(buf);
+      var br = new aipgcore.encoding.BufferReader(buf);
       reversed = br.readReverse();
       c++;
     }
@@ -79,8 +79,8 @@ async.series([
     var block2;
     var block3;
 
-    function ravencoreTest() {
-      block1 = ravencore.Block.fromString(blockData);
+    function aipgcoreTest() {
+      block1 = aipgcore.Block.fromString(blockData);
     }
 
     function bitcoinJSTest() {
@@ -102,7 +102,7 @@ async.series([
     }
 
     var suite = new benchmark.Suite();
-    suite.add('ravencore', ravencoreTest, {maxTime: maxTime});
+    suite.add('aipgcore', aipgcoreTest, {maxTime: maxTime});
     suite.add('bitcoinjs', bitcoinJSTest, {maxTime: maxTime});
     suite.add('bcoin', bcoinTest, {maxTime: maxTime});
     suite.add('fullnode', fullnodeTest, {maxTime: maxTime});

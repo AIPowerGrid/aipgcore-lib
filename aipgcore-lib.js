@@ -179,7 +179,7 @@ Address._classifyFromVersion = function(buffer) {
 };
 
 /**
- * Internal function to transform a ravencoin address buffer
+ * Internal function to transform a aipgcoin address buffer
  *
  * @param {Buffer} buffer - An instance of a hex encoded address Buffer
  * @param {string=} network - The network: 'livenet' or 'testnet'
@@ -250,7 +250,7 @@ Address._transformScript = function(script, network) {
 /**
  * Creates a P2SH address from a set of public keys and a threshold.
  *
- * The addresses will be sorted lexicographically, as that is the trend in ravencoin.
+ * The addresses will be sorted lexicographically, as that is the trend in aipgcoin.
  * To create an address from unsorted public keys, use the {@link Script#buildMultisigOut}
  * interface.
  *
@@ -270,7 +270,7 @@ Address.createMultisig = function(publicKeys, threshold, network, nestedWitness)
 };
 
 /**
- * Internal function to transform a ravencoin address string
+ * Internal function to transform a aipgcoin address string
  *
  * @param {string} data
  * @param {String|Network=} network - either a Network instance, 'livenet', or 'testnet'
@@ -376,7 +376,7 @@ Address.fromBuffer = function(buffer, network, type) {
 /**
  * Instantiate an address from an address string
  *
- * @param {string} str - An string of the ravencoin address
+ * @param {string} str - An string of the aipgcoin address
  * @param {String|Network=} network - either a Network instance, 'livenet', or 'testnet'
  * @param {string=} type - The type of address: 'script' or 'pubkey'
  * @returns {Address} A new valid and frozen instance of an Address
@@ -462,7 +462,7 @@ Address.prototype.isPayToScriptHash = function() {
 /**
  * Will return a buffer representation of the address
  *
- * @returns {Buffer} Ravencoin address buffer
+ * @returns {Buffer} aipgcoin address buffer
  */
 Address.prototype.toBuffer = function() {
   var version = Buffer.from([this.network[this.type]]);
@@ -483,7 +483,7 @@ Address.prototype.toObject = Address.prototype.toJSON = function toObject() {
 /**
  * Will return a the string representation of the address
  *
- * @returns {string} Ravencoin address
+ * @returns {string} aipgcoin address
  */
 Address.prototype.toString = function() {
   return Base58Check.encode(this.toBuffer());
@@ -492,7 +492,7 @@ Address.prototype.toString = function() {
 /**
  * Will return a string formatted for the console
  *
- * @returns {string} Ravencoin address
+ * @returns {string} aipgcoin address
  */
 Address.prototype.inspect = function() {
   return '<Address: ' + this.toString() + ', type: ' + this.type + ', network: ' + this.network + '>';
@@ -1311,7 +1311,7 @@ MerkleBlock.prototype.filterdTxsHash = function filterdTxsHash() {
 
 /**
  * Traverse a the tree in this MerkleBlock, validating it along the way
- * Modeled after Ravencoin Core merkleblock.cpp TraverseAndExtract()
+ * Modeled after aipgcoin Core merkleblock.cpp TraverseAndExtract()
  * @param {Number} - depth - Current height
  * @param {Number} - pos - Current position in the tree
  * @param {Object} - opts - Object with values that need to be mutated throughout the traversal
@@ -1361,7 +1361,7 @@ MerkleBlock.prototype._traverseMerkleTree = function traverseMerkleTree(depth, p
 };
 
 /** Calculates the width of a merkle tree at a given height.
- *  Modeled after Ravencoin Core merkleblock.h CalcTreeWidth()
+ *  Modeled after aipgcoin Core merkleblock.h CalcTreeWidth()
  * @param {Number} - Height at which we want the tree width
  * @returns {Number} - Width of the tree at a given height
  * @private
@@ -1571,8 +1571,8 @@ BN.prototype.toSM = function(opts) {
 
 /**
  * Create a BN from a "ScriptNum":
- * This is analogous to the constructor for CScriptNum in ravend. Many ops in
- * ravend's script interpreter use CScriptNum, which is not really a proper
+ * This is analogous to the constructor for CScriptNum in aipgd. Many ops in
+ * aipgd's script interpreter use CScriptNum, which is not really a proper
  * bignum. Instead, an error is thrown if trying to input a number bigger than
  * 4 bytes. We copy that behavior here. A third argument, `size`, is provided to
  * extend the hard limit of 4 bytes, as some usages require more than 4 bytes.
@@ -2034,13 +2034,13 @@ Hash.sha256hmac = function(data, key) {
 Hash.sha512hmac = function(data, key) {
   return Hash.hmac(Hash.sha512, data, key);
 };
-// Ravencoin x16r hashing
+// aipgcoin x16r hashing
 Hash.x16r = function(buf) {
   $.checkArgument(BufferUtil.isBuffer(buf));
   return BufferUtil.reverse(nodeX16r.x16r(buf));
 };
 
-// Ravencoin x16rv2 hashing
+// aipgcoin x16rv2 hashing
 Hash.x16rv2 = function(buf) {
   $.checkArgument(BufferUtil.isBuffer(buf));
   return BufferUtil.reverse(nodeX16rV2.x16rv2(buf));
@@ -2458,7 +2458,7 @@ Signature.prototype.toString = function() {
 };
 
 /**
- * This function is translated from ravend's IsDERSignature and is used in
+ * This function is translated from aipgd's IsDERSignature and is used in
  * the script interpreter.  This "DER" format actually includes an extra byte,
  * the nhashtype, at the end. It is really the tx format, not DER format.
  *
@@ -2536,7 +2536,7 @@ Signature.isTxDER = function(buf) {
 };
 
 /**
- * Compares to ravend's IsLowDERSignature
+ * Compares to aipgd's IsLowDERSignature
  * See also ECDSA signature algorithm which enforces this.
  * See also BIP 62, "low S values in signatures"
  */
@@ -2550,7 +2550,7 @@ Signature.prototype.hasLowS = function() {
 
 /**
  * @returns true if the nhashtype is exactly equal to one of the standard options or combinations thereof.
- * Translated from ravend's IsDefinedHashtypeSignature
+ * Translated from aipgd's IsDefinedHashtypeSignature
  */
 Signature.prototype.hasDefinedHashtype = function() {
   if (!JSUtil.isNaturalNumber(this.nhashtype)) {
@@ -3234,22 +3234,22 @@ var traverseRoot = function(parent, errorsDefinition) {
 };
 
 
-var ravencore = {};
-ravencore.Error = function() {
+var aipgcore = {};
+aipgcore.Error = function() {
   this.message = 'Internal error';
   this.stack = this.message + '\n' + (new Error()).stack;
 };
-ravencore.Error.prototype = Object.create(Error.prototype);
-ravencore.Error.prototype.name = 'ravencore.Error';
+aipgcore.Error.prototype = Object.create(Error.prototype);
+aipgcore.Error.prototype.name = 'aipgcore.Error';
 
 
 var data = require('./spec');
-traverseRoot(ravencore.Error, data);
+traverseRoot(aipgcore.Error, data);
 
-module.exports = ravencore.Error;
+module.exports = aipgcore.Error;
 
 module.exports.extend = function(spec) {
-  return traverseNode(ravencore.Error, spec);
+  return traverseNode(aipgcore.Error, spec);
 };
 
 },{"./spec":18,"lodash":160}],18:[function(require,module,exports){
@@ -3859,7 +3859,7 @@ HDPrivateKey.fromSeed = function(hexa, network) {
   if (hexa.length > MAXIMUM_ENTROPY_BITS * BITS_TO_BYTES) {
     throw new hdErrors.InvalidEntropyArgument.TooMuchEntropy(hexa);
   }
-  var hash = Hash.sha512hmac(hexa, buffer.Buffer.from('Ravencoin seed'));
+  var hash = Hash.sha512hmac(hexa, buffer.Buffer.from('aipgcoin seed'));
 
   return new HDPrivateKey({
     network: Network.get(network) || Network.defaultNetwork,
@@ -4104,9 +4104,9 @@ var Network = require('./networks');
 var Point = require('./crypto/point');
 var PublicKey = require('./publickey');
 
-var ravencoreErrors = require('./errors');
-var errors = ravencoreErrors;
-var hdErrors = ravencoreErrors.HDPublicKey;
+var aipgcoreErrors = require('./errors');
+var errors = aipgcoreErrors;
+var hdErrors = aipgcoreErrors.HDPublicKey;
 var assert = require('assert');
 
 var JSUtil = require('./util/js');
@@ -4599,7 +4599,7 @@ var networkMaps = {};
 
 /**
  * A network is merely a map containing values that correspond to version
- * numbers for each ravencoin network. Currently only supporting "livenet"
+ * numbers for each aipgcoin network. Currently only supporting "livenet"
  * (a.k.a. "mainnet") and "testnet".
  * @constructor
  */
@@ -4728,8 +4728,8 @@ addNetwork({
   networkMagic: 0x5241564e,
   port: 8767,
   dnsSeeds: [
-    'seed-raven.ravencoin.org',
-    'seed-raven.bitactivate.com'
+    'seed-aipg.aipgcoin.org',
+    'seed-aipg.bitactivate.com'
   ]
 });
 
@@ -4761,8 +4761,8 @@ var TESTNET = {
   PORT: 18767,
   NETWORK_MAGIC: BufferUtil.integerAsBuffer(0x52564e54),
   DNS_SEEDS: [
-    'seed-testnet-raven.ravencoin.org',
-    'seed-testnet-raven.bitactivate.com'
+    'seed-testnet-aipg.aipgcoin.org',
+    'seed-testnet-aipg.bitactivate.com'
   ]
 };
 
@@ -5925,7 +5925,7 @@ var Signature = require('../crypto/signature');
 var PublicKey = require('../publickey');
 
 /**
- * Ravencoin transactions contain scripts. Each input has a script called the
+ * aipgcoin transactions contain scripts. Each input has a script called the
  * scriptSig, and each output has a script called the scriptPubkey. To validate
  * an input, the input's script is concatenated with the referenced output script,
  * and the result is executed. If at the end of execution the stack contains a
@@ -6033,7 +6033,7 @@ Interpreter.prototype.verifyWitnessProgram = function(version, program, witness,
  * @param {number} witness - array of witness data
  * @param {number} satoshis - number of satoshis created by this output
  *
- * Translated from ravend's VerifyScript
+ * Translated from aipgd's VerifyScript
  */
 Interpreter.prototype.verify = function(scriptSig, scriptPubkey, tx, nin, flags, witness, satoshis) {
 
@@ -6231,8 +6231,8 @@ Interpreter.MAX_SCRIPT_ELEMENT_SIZE = 520;
 Interpreter.LOCKTIME_THRESHOLD = 500000000;
 Interpreter.LOCKTIME_THRESHOLD_BN = new BN(Interpreter.LOCKTIME_THRESHOLD);
 
-// flags taken from ravend
-// ravend commit: b5d1b1092998bc95313856d535c632ea5a8f9104
+// flags taken from aipgd
+// aipgd commit: b5d1b1092998bc95313856d535c632ea5a8f9104
 Interpreter.SCRIPT_VERIFY_NONE = 0;
 
 // Making v1-v16 witness program non-standard
@@ -6295,7 +6295,7 @@ Interpreter.castToBool = function(buf) {
 };
 
 /**
- * Translated from ravend's CheckSignatureEncoding
+ * Translated from aipgd's CheckSignatureEncoding
  */
 Interpreter.prototype.checkSignatureEncoding = function(buf) {
   var sig;
@@ -6319,7 +6319,7 @@ Interpreter.prototype.checkSignatureEncoding = function(buf) {
 };
 
 /**
- * Translated from ravend's CheckPubKeyEncoding
+ * Translated from aipgd's CheckPubKeyEncoding
  */
 Interpreter.prototype.checkPubkeyEncoding = function(buf) {
   if ((this.flags & Interpreter.SCRIPT_VERIFY_STRICTENC) !== 0 && !PublicKey.isValid(buf)) {
@@ -6330,9 +6330,9 @@ Interpreter.prototype.checkPubkeyEncoding = function(buf) {
 };
 
 /**
- * Based on ravend's EvalScript function, with the inner loop moved to
+ * Based on aipgd's EvalScript function, with the inner loop moved to
  * Interpreter.prototype.step()
- * ravend commit: b5d1b1092998bc95313856d535c632ea5a8f9104
+ * aipgd commit: b5d1b1092998bc95313856d535c632ea5a8f9104
  */
 Interpreter.prototype.evaluate = function() {
   if (this.script.toBuffer().length > 10000) {
@@ -6371,7 +6371,7 @@ Interpreter.prototype.evaluate = function() {
  * There are two times of nLockTime: lock-by-blockheight and lock-by-blocktime,
  * distinguished by whether nLockTime < LOCKTIME_THRESHOLD = 500000000
  *
- * See the corresponding code on Ravencoin core:
+ * See the corresponding code on aipgcoin core:
  * https://github.com/bitcoin/bitcoin/blob/ffd75adce01a78b3461b3ff05bcc2b530a9ce994/src/script/interpreter.cpp#L1129
  *
  * @param {BN} nLockTime the locktime read from the script
@@ -6414,8 +6414,8 @@ Interpreter.prototype.checkLockTime = function(nLockTime) {
 }
 
 /**
- * Based on the inner loop of ravend's EvalScript function
- * ravend commit: b5d1b1092998bc95313856d535c632ea5a8f9104
+ * Based on the inner loop of aipgd's EvalScript function
+ * aipgd commit: b5d1b1092998bc95313856d535c632ea5a8f9104
  */
 Interpreter.prototype.step = function() {
 
@@ -7333,7 +7333,7 @@ var BufferUtil = require('../util/buffer');
 var JSUtil = require('../util/js');
 
 /**
- * A ravencoin transaction script. Each transaction's inputs and outputs
+ * A aipgcoin transaction script. Each transaction's inputs and outputs
  * has a script that is evaluated to validate it's spending.
  *
  * See https://en.bitcoin.it/wiki/Script
@@ -8364,7 +8364,7 @@ Script.prototype.toAddress = function(network) {
 };
 
 /**
- * Analogous to ravend's FindAndDelete. Find and delete equivalent chunks,
+ * Analogous to aipgd's FindAndDelete. Find and delete equivalent chunks,
  * typically used with push data chunks.  Note that this will find and delete
  * not just the same data, but the same data with the same push data op as
  * produced by default. i.e., if a pushdata in a tx does not use the minimal
@@ -8388,7 +8388,7 @@ Script.prototype.findAndDelete = function(script) {
 };
 
 /**
- * Comes from ravend's script interpreter CheckMinimalPush function
+ * Comes from aipgd's script interpreter CheckMinimalPush function
  * @returns {boolean} if the chunk {i} is the smallest way to push that particular data.
  */
 Script.prototype.checkMinimalPush = function(i) {
@@ -8421,7 +8421,7 @@ Script.prototype.checkMinimalPush = function(i) {
 };
 
 /**
- * Comes from ravend's script DecodeOP_N function
+ * Comes from aipgd's script DecodeOP_N function
  * @param {number} opcode
  * @returns {number} numeric value in range of 0 to 16
  */
@@ -8436,7 +8436,7 @@ Script.prototype._decodeOP_N = function(opcode) {
 };
 
 /**
- * Comes from ravend's script GetSigOpCount(boolean) function
+ * Comes from aipgd's script GetSigOpCount(boolean) function
  * @param {boolean} use current (true) or pre-version-0.6 (false) logic
  * @returns {number} number of signature operations required by this script
  */
@@ -10058,7 +10058,7 @@ Transaction.prototype._getWitnessHash = function() {
 };
 
 /**
- * Retrieve a hexa string that can be used with ravend's CLI interface
+ * Retrieve a hexa string that can be used with aipgd's CLI interface
  * (decoderawtransaction, sendrawtransaction)
  *
  * @param {Object|boolean=} unsafe if true, skip all tests. if it's an object,
@@ -10068,7 +10068,7 @@ Transaction.prototype._getWitnessHash = function() {
  * * `disableLargeFees`: disable checking for fees that are too large
  * * `disableIsFullySigned`: disable checking if all inputs are fully signed
  * * `disableDustOutputs`: disable checking if there are no outputs that are dust amounts
- * * `disableMoreOutputThanInput`: disable checking if the transaction spends more ravencoins than the sum of the input amounts
+ * * `disableMoreOutputThanInput`: disable checking if the transaction spends more aipgcoins than the sum of the input amounts
  * @return {string}
  */
 Transaction.prototype.serialize = function(unsafe) {
@@ -10084,7 +10084,7 @@ Transaction.prototype.uncheckedSerialize = Transaction.prototype.toString = func
 };
 
 /**
- * Retrieve a hexa string that can be used with ravend's CLI interface
+ * Retrieve a hexa string that can be used with aipgd's CLI interface
  * (decoderawtransaction, sendrawtransaction)
  *
  * @param {Object} opts allows to skip certain tests. {@see Transaction#serialize}
@@ -10115,7 +10115,7 @@ Transaction.prototype.invalidSatoshis = function() {
  * broadcast this transaction.
  *
  * @param {Object} opts allows to skip certain tests. {@see Transaction#serialize}
- * @return {ravencore.Error}
+ * @return {aipgcore.Error}
  */
 Transaction.prototype.getSerializationError = function(opts) {
   opts = opts || {};
@@ -10478,8 +10478,8 @@ Transaction.prototype._newTransaction = function() {
  * Add an input to this transaction. This is a high level interface
  * to add an input, for more control, use @{link Transaction#addInput}.
  *
- * Can receive, as output information, the output of ravend's `listunspent` command,
- * and a slightly fancier format recognized by ravencore:
+ * Can receive, as output information, the output of aipgd's `listunspent` command,
+ * and a slightly fancier format recognized by aipgcore:
  *
  * ```
  * {
@@ -10490,8 +10490,8 @@ Transaction.prototype._newTransaction = function() {
  *  satoshis: 1020000
  * }
  * ```
- * Where `address` can be either a string or a ravencore Address object. The
- * same is true for `script`, which can be a string or a ravencore Script.
+ * Where `address` can be either a string or a aipgcore Address object. The
+ * same is true for `script`, which can be a string or a aipgcore Script.
  *
  * Beware that this resets all the signatures for inputs (in further versions,
  * SIGHASH_SINGLE or SIGHASH_NONE signatures will not be reset).
@@ -10500,7 +10500,7 @@ Transaction.prototype._newTransaction = function() {
  * ```javascript
  * var transaction = new Transaction();
  *
- * // From a pay to public key hash output from ravend's listunspent
+ * // From a pay to public key hash output from aipgd's listunspent
  * transaction.from({'txid': '0000...', vout: 0, amount: 0.1, scriptPubKey: 'OP_DUP ...'});
  *
  * // From a pay to public key hash output
@@ -11140,7 +11140,7 @@ Transaction.prototype.verifySignature = function(sig, pubkey, nin, subscript, si
 /**
  * Check that a transaction passes basic sanity tests. If not, return a string
  * describing the error. This function contains the same logic as
- * CheckTransaction in ravencoin core.
+ * CheckTransaction in aipgcoin core.
  */
 Transaction.prototype.verify = function() {
   // Basic checks that don't depend on any context
@@ -11203,7 +11203,7 @@ Transaction.prototype.verify = function() {
 };
 
 /**
- * Analogous to ravend's IsCoinBase function in transaction.h
+ * Analogous to aipgd's IsCoinBase function in transaction.h
  */
 Transaction.prototype.isCoinbase = function() {
   return (this.inputs.length === 1 && this.inputs[0].isNull());
@@ -11265,7 +11265,7 @@ var Unit = require('../unit');
  * @param {number=} data.outputIndex alias for `vout`
  * @param {string|Script} data.scriptPubKey the script that must be resolved to release the funds
  * @param {string|Script=} data.script alias for `scriptPubKey`
- * @param {number} data.amount amount of ravencoins associated
+ * @param {number} data.amount amount of aipgcoins associated
  * @param {number=} data.satoshis alias for `amount`, but expressed in satoshis (1 BTC = 1e8 satoshis)
  * @param {string|Address=} data.address the associated address to the script, if provided
  */
@@ -11361,7 +11361,7 @@ var UNITS = {
 };
 
 /**
- * Utility for handling and converting ravencoins units. The supported units are
+ * Utility for handling and converting aipgcoins units. The supported units are
  * BTC, mBTC, bits (also named uBTC) and satoshis. A unit instance can be created with an
  * amount and a unit code, or alternatively using static methods like {fromBTC}.
  * It also allows to be created from a fiat amount and the exchange rate, or
@@ -11594,10 +11594,10 @@ var Address = require('./address');
 var Unit = require('./unit');
 
 /**
- * Ravencore URI
+ * aipgcore URI
  *
- * Instantiate an URI from a ravencoin URI String or an Object. An URI instance
- * can be created with a ravencoin uri string or an object. All instances of
+ * Instantiate an URI from a aipgcoin URI String or an Object. An URI instance
+ * can be created with a aipgcoin uri string or an object. All instances of
  * URI are valid, the static method isValid allows checking before instantiation.
  *
  * All standard parameters can be found as members of the class, the address
@@ -11607,13 +11607,13 @@ var Unit = require('./unit');
  * @example
  * ```javascript
  *
- * var uri = new URI('ravencoin:RGRsG7UQc3AmvdrhPDngpPjvTNhJQFeHYj?amount=1.2');
+ * var uri = new URI('aipgcoin:RGRsG7UQc3AmvdrhPDngpPjvTNhJQFeHYj?amount=1.2');
  * console.log(uri.address, uri.amount);
  * ```
  *
- * @param {string|Object} data - A ravencoin URI string or an Object
+ * @param {string|Object} data - A aipgcoin URI string or an Object
  * @param {Array.<string>=} knownParams - Required non-standard params
- * @throws {TypeError} Invalid ravencoin address
+ * @throws {TypeError} Invalid aipgcoin address
  * @throws {TypeError} Invalid amount
  * @throws {Error} Unknown required argument
  * @returns {URI} A new valid and frozen instance of URI
@@ -11665,16 +11665,16 @@ URI.fromObject = function fromObject(json) {
 };
 
 /**
- * Check if an ravencoin URI string is valid
+ * Check if an aipgcoin URI string is valid
  *
  * @example
  * ```javascript
  *
- * var valid = URI.isValid('ravencoin:RGRsG7UQc3AmvdrhPDngpPjvTNhJQFeHYj');
+ * var valid = URI.isValid('aipgcoin:RGRsG7UQc3AmvdrhPDngpPjvTNhJQFeHYj');
  * // true
  * ```
  *
- * @param {string|Object} data - A ravencoin URI string or an Object
+ * @param {string|Object} data - A aipgcoin URI string or an Object
  * @param {Array.<string>=} knownParams - Required non-standard params
  * @returns {boolean} Result of uri validation
  */
@@ -11688,17 +11688,17 @@ URI.isValid = function(arg, knownParams) {
 };
 
 /**
- * Convert a ravencoin URI string into a simple object.
+ * Convert a aipgcoin URI string into a simple object.
  *
- * @param {string} uri - A ravencoin URI string
- * @throws {TypeError} Invalid ravencoin URI
+ * @param {string} uri - A aipgcoin URI string
+ * @throws {TypeError} Invalid aipgcoin URI
  * @returns {Object} An object with the parsed params
  */
 URI.parse = function(uri) {
   var info = URL.parse(uri, true);
 
-  if (info.protocol !== 'ravencoin:') {
-    throw new TypeError('Invalid ravencoin URI');
+  if (info.protocol !== 'aipgcoin:') {
+    throw new TypeError('Invalid aipgcoin URI');
   }
 
   // workaround to host insensitiveness
@@ -11714,7 +11714,7 @@ URI.Members = ['address', 'amount', 'message', 'label', 'r'];
  * Internal function to load the URI instance with an object.
  *
  * @param {Object} obj - Object with the information
- * @throws {TypeError} Invalid ravencoin address
+ * @throws {TypeError} Invalid aipgcoin address
  * @throws {TypeError} Invalid amount
  * @throws {Error} Unknown required argument
  */
@@ -11722,7 +11722,7 @@ URI.prototype._fromObject = function(obj) {
   /* jshint maxcomplexity: 10 */
 
   if (!Address.isValid(obj.address)) {
-    throw new TypeError('Invalid ravencoin address');
+    throw new TypeError('Invalid aipgcoin address');
   }
 
   this.address = new Address(obj.address);
@@ -11773,7 +11773,7 @@ URI.prototype.toObject = URI.prototype.toJSON = function toObject() {
 /**
  * Will return a the string representation of the URI
  *
- * @returns {string} Ravencoin URI string
+ * @returns {string} aipgcoin URI string
  */
 URI.prototype.toString = function() {
   var query = {};
@@ -11792,7 +11792,7 @@ URI.prototype.toString = function() {
   _.extend(query, this.extras);
 
   return URL.format({
-    protocol: 'ravencoin:',
+    protocol: 'aipgcoin:',
     host: this.address,
     query: query
   });
@@ -11801,7 +11801,7 @@ URI.prototype.toString = function() {
 /**
  * Will return a string formatted for the console
  *
- * @returns {string} Ravencoin URI
+ * @returns {string} aipgcoin URI
  */
 URI.prototype.inspect = function() {
   return '<URI: ' + this.toString() + '>';
@@ -28445,7 +28445,7 @@ module.exports={
   "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-6.4.0.tgz",
   "_shasum": "cac9af8762c85836187003c8dfe193e5e2eae5df",
   "_spec": "elliptic@6.4.0",
-  "_where": "/home/ubuntu/ravencore-lib",
+  "_where": "/home/ubuntu/aipgcore-lib",
   "author": {
     "name": "Fedor Indutny",
     "email": "fedor@indutny.com"
@@ -55104,9 +55104,9 @@ exports.createContext = Script.createContext = function (context) {
 
 },{"indexof":156}],223:[function(require,module,exports){
 module.exports={
-  "name": "ravencore-lib",
+  "name": "aipgcore-lib",
   "version": "1.0.3",
-  "description": "A pure and powerful JavaScript Ravencoin library.",
+  "description": "A pure and powerful JavaScript aipgcoin library.",
   "author": "Under",
   "main": "index.js",
   "scripts": {
@@ -55174,7 +55174,7 @@ module.exports={
     }
   ],
   "keywords": [
-    "ravencoin",
+    "aipgcoin",
     "transaction",
     "address",
     "p2p",
@@ -55191,7 +55191,7 @@ module.exports={
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/underdarkskies/ravencore-lib.git"
+    "url": "https://github.com/AIPowerGrid/aipgcore-lib.git"
   },
   "browser": {
     "request": "browser-request"
@@ -55210,85 +55210,85 @@ module.exports={
     "brfs": "^1.2.0",
     "chai": "^1.10.0",
     "gulp": "^3.8.10",
-    "ravencore-build": "github:underdarkskies/ravencore-build",
+    "aipgcore-build": "github:AIPowerGrid/aipgcore-build",
     "sinon": "^1.13.0"
   },
   "license": "MIT"
 }
 
-},{}],"ravencore-lib":[function(require,module,exports){
+},{}],"aipgcore-lib":[function(require,module,exports){
 (function (global,Buffer){
 'use strict';
 
-var ravencore = module.exports;
+var aipgcore = module.exports;
 
 // module information
-ravencore.version = 'v' + require('./package.json').version;
-ravencore.versionGuard = function(version) {
+aipgcore.version = 'v' + require('./package.json').version;
+aipgcore.versionGuard = function(version) {
   if (version !== undefined) {
-    var message = 'More than one instance of ravencore-lib found. ' +
-      'Please make sure to require ravencore-lib and check that submodules do' +
-      ' not also include their own ravencore-lib dependency.';
+    var message = 'More than one instance of aipgcore-lib found. ' +
+      'Please make sure to require aipgcore-lib and check that submodules do' +
+      ' not also include their own aipgcore-lib dependency.';
     throw new Error(message);
   }
 };
-ravencore.versionGuard(global._ravencore);
-global._ravencore = ravencore.version;
+aipgcore.versionGuard(global._aipgcore);
+global._aipgcore = aipgcore.version;
 
 // crypto
-ravencore.crypto = {};
-ravencore.crypto.BN = require('./lib/crypto/bn');
-ravencore.crypto.ECDSA = require('./lib/crypto/ecdsa');
-ravencore.crypto.Hash = require('./lib/crypto/hash');
-ravencore.crypto.Random = require('./lib/crypto/random');
-ravencore.crypto.Point = require('./lib/crypto/point');
-ravencore.crypto.Signature = require('./lib/crypto/signature');
+aipgcore.crypto = {};
+aipgcore.crypto.BN = require('./lib/crypto/bn');
+aipgcore.crypto.ECDSA = require('./lib/crypto/ecdsa');
+aipgcore.crypto.Hash = require('./lib/crypto/hash');
+aipgcore.crypto.Random = require('./lib/crypto/random');
+aipgcore.crypto.Point = require('./lib/crypto/point');
+aipgcore.crypto.Signature = require('./lib/crypto/signature');
 
 // encoding
-ravencore.encoding = {};
-ravencore.encoding.Base58 = require('./lib/encoding/base58');
-ravencore.encoding.Base58Check = require('./lib/encoding/base58check');
-ravencore.encoding.BufferReader = require('./lib/encoding/bufferreader');
-ravencore.encoding.BufferWriter = require('./lib/encoding/bufferwriter');
-ravencore.encoding.Varint = require('./lib/encoding/varint');
+aipgcore.encoding = {};
+aipgcore.encoding.Base58 = require('./lib/encoding/base58');
+aipgcore.encoding.Base58Check = require('./lib/encoding/base58check');
+aipgcore.encoding.BufferReader = require('./lib/encoding/bufferreader');
+aipgcore.encoding.BufferWriter = require('./lib/encoding/bufferwriter');
+aipgcore.encoding.Varint = require('./lib/encoding/varint');
 
 // utilities
-ravencore.util = {};
-ravencore.util.buffer = require('./lib/util/buffer');
-ravencore.util.js = require('./lib/util/js');
-ravencore.util.preconditions = require('./lib/util/preconditions');
+aipgcore.util = {};
+aipgcore.util.buffer = require('./lib/util/buffer');
+aipgcore.util.js = require('./lib/util/js');
+aipgcore.util.preconditions = require('./lib/util/preconditions');
 
 // errors thrown by the library
-ravencore.errors = require('./lib/errors');
+aipgcore.errors = require('./lib/errors');
 
-// main ravencoin library
-ravencore.Address = require('./lib/address');
-ravencore.Block = require('./lib/block');
-ravencore.MerkleBlock = require('./lib/block/merkleblock');
-ravencore.BlockHeader = require('./lib/block/blockheader');
-ravencore.HDPrivateKey = require('./lib/hdprivatekey.js');
-ravencore.HDPublicKey = require('./lib/hdpublickey.js');
-ravencore.Networks = require('./lib/networks');
-ravencore.Opcode = require('./lib/opcode');
-ravencore.PrivateKey = require('./lib/privatekey');
-ravencore.PublicKey = require('./lib/publickey');
-ravencore.Script = require('./lib/script');
-ravencore.Transaction = require('./lib/transaction');
-ravencore.URI = require('./lib/uri');
-ravencore.Unit = require('./lib/unit');
+// main aipgcoin library
+aipgcore.Address = require('./lib/address');
+aipgcore.Block = require('./lib/block');
+aipgcore.MerkleBlock = require('./lib/block/merkleblock');
+aipgcore.BlockHeader = require('./lib/block/blockheader');
+aipgcore.HDPrivateKey = require('./lib/hdprivatekey.js');
+aipgcore.HDPublicKey = require('./lib/hdpublickey.js');
+aipgcore.Networks = require('./lib/networks');
+aipgcore.Opcode = require('./lib/opcode');
+aipgcore.PrivateKey = require('./lib/privatekey');
+aipgcore.PublicKey = require('./lib/publickey');
+aipgcore.Script = require('./lib/script');
+aipgcore.Transaction = require('./lib/transaction');
+aipgcore.URI = require('./lib/uri');
+aipgcore.Unit = require('./lib/unit');
 
 // dependencies, subject to change
-ravencore.deps = {};
-ravencore.deps.bnjs = require('bn.js');
-ravencore.deps.bs58 = require('bs58');
-ravencore.deps.Buffer = Buffer;
-ravencore.deps.elliptic = require('elliptic');
-ravencore.deps.nodeX16r = require('node-x16r');
-ravencore.deps.nodeX16rV2 = require('node-x16rv2');
-ravencore.deps._ = require('lodash');
+aipgcore.deps = {};
+aipgcore.deps.bnjs = require('bn.js');
+aipgcore.deps.bs58 = require('bs58');
+aipgcore.deps.Buffer = Buffer;
+aipgcore.deps.elliptic = require('elliptic');
+aipgcore.deps.nodeX16r = require('node-x16r');
+aipgcore.deps.nodeX16rV2 = require('node-x16rv2');
+aipgcore.deps._ = require('lodash');
 
 // Internal usage, exposed for testing/advanced tweaking
-ravencore.Transaction.sighash = require('./lib/transaction/sighash');
+aipgcore.Transaction.sighash = require('./lib/transaction/sighash');
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
 },{"./lib/address":1,"./lib/block":4,"./lib/block/blockheader":3,"./lib/block/merkleblock":5,"./lib/crypto/bn":6,"./lib/crypto/ecdsa":7,"./lib/crypto/hash":8,"./lib/crypto/point":9,"./lib/crypto/random":10,"./lib/crypto/signature":11,"./lib/encoding/base58":12,"./lib/encoding/base58check":13,"./lib/encoding/bufferreader":14,"./lib/encoding/bufferwriter":15,"./lib/encoding/varint":16,"./lib/errors":17,"./lib/hdprivatekey.js":19,"./lib/hdpublickey.js":20,"./lib/networks":21,"./lib/opcode":22,"./lib/privatekey":23,"./lib/publickey":24,"./lib/script":25,"./lib/transaction":28,"./lib/transaction/sighash":36,"./lib/unit":41,"./lib/uri":42,"./lib/util/buffer":43,"./lib/util/js":44,"./lib/util/preconditions":45,"./package.json":223,"bn.js":67,"bs58":99,"buffer":102,"elliptic":121,"lodash":160,"node-x16r":165,"node-x16rv2":166}]},{},[]);

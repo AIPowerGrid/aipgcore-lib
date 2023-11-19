@@ -6,14 +6,14 @@ var chai = require('chai');
 var should = chai.should();
 var expect = chai.expect;
 
-var ravencore = require('..');
-var PublicKey = ravencore.PublicKey;
-var Address = ravencore.Address;
-var Script = ravencore.Script;
-var Networks = ravencore.Networks;
+var aipgcore = require('..');
+var PublicKey = aipgcore.PublicKey;
+var Address = aipgcore.Address;
+var Script = aipgcore.Script;
+var Networks = aipgcore.Networks;
 
-var validbase58 = require('./data/ravend/base58_keys_valid.json');
-var invalidbase58 = require('./data/ravend/base58_keys_invalid.json');
+var validbase58 = require('./data/aipgd/base58_keys_valid.json');
+var invalidbase58 = require('./data/aipgd/base58_keys_invalid.json');
 
 describe('Address', function() {
   // livenet valid
@@ -88,7 +88,7 @@ describe('Address', function() {
     }).should.throw('Third argument must be "pubkeyhash" or "scripthash"');
   });
 
-  describe('ravend compliance', function() {
+  describe('aipgd compliance', function() {
     validbase58.map(function(d) {
       if (!d[2].isPrivkey) {
         it('should describe address ' + d[0] + ' as valid', function() {
@@ -258,7 +258,7 @@ describe('Address', function() {
     it('should error because of unrecognized data format', function() {
       (function() {
         return new Address(new Error());
-      }).should.throw(ravencore.errors.InvalidArgument);
+      }).should.throw(aipgcore.errors.InvalidArgument);
     });
 
     it('should error because of incorrect format for pubkey hash', function() {
@@ -461,7 +461,7 @@ describe('Address', function() {
     it('will fail with invalid state', function() {
       expect(function() {
         return Address.fromObject('¹');
-      }).to.throw(ravencore.errors.InvalidState);
+      }).to.throw(aipgcore.errors.InvalidState);
     });
   });
 

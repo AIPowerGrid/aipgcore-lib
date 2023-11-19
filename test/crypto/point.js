@@ -1,9 +1,9 @@
 'use strict';
 
 var should = require('chai').should();
-var ravencore = require('../..');
-var Point = ravencore.crypto.Point;
-var BN = ravencore.crypto.BN;
+var aipgcore = require('../..');
+var Point = aipgcore.crypto.Point;
+var BN = aipgcore.crypto.BN;
 
 describe('Point', function() {
 

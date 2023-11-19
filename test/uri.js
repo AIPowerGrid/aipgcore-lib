@@ -1,11 +1,11 @@
 'use strict';
 
 var chai = chai || require('chai');
-var ravencore = require('..');
+var aipgcore = require('..');
 var expect = chai.expect;
-var Networks = ravencore.Networks;
+var Networks = aipgcore.Networks;
 var should = chai.should();
-var URI = ravencore.URI;
+var URI = aipgcore.URI;
 
 describe('URI', function() {
   /* jshint maxstatements: 30 */
@@ -16,22 +16,22 @@ describe('URI', function() {
 
     URI.parse.bind(URI, 'badURI').should.throw(TypeError);
 
-    uri = URI.parse('ravencoin:');
+    uri = URI.parse('aipgcoin:');
     expect(uri.address).to.be.undefined();
     expect(uri.amount).to.be.undefined();
     expect(uri.otherParam).to.be.undefined();
 
-    uri = URI.parse('ravencoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K');
+    uri = URI.parse('aipgcoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K');
     uri.address.should.equal('R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K');
     expect(uri.amount).to.be.undefined();
     expect(uri.otherParam).to.be.undefined();
 
-    uri = URI.parse('ravencoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?amount=123.22');
+    uri = URI.parse('aipgcoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?amount=123.22');
     uri.address.should.equal('R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K');
     uri.amount.should.equal('123.22');
     expect(uri.otherParam).to.be.undefined();
 
-    uri = URI.parse('ravencoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?amount=123.22' +
+    uri = URI.parse('aipgcoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?amount=123.22' +
                     '&other-param=something&req-extra=param');
     uri.address.should.equal('R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K');
     uri.amount.should.equal('123.22');
@@ -41,24 +41,24 @@ describe('URI', function() {
 
   // TODO: Split this and explain tests
   it('URIs can be validated statically (test vector)', function() {
-    URI.isValid('ravencoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K').should.equal(true);
-    URI.isValid('ravencoin:moSNtynymW8y9Pe4veLGhSpBL8yw4t8JWs').should.equal(true);
+    URI.isValid('aipgcoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K').should.equal(true);
+    URI.isValid('aipgcoin:moSNtynymW8y9Pe4veLGhSpBL8yw4t8JWs').should.equal(true);
 
-    URI.isValid('ravencoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?amount=1.2')
+    URI.isValid('aipgcoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?amount=1.2')
                 .should.equal(true);
-    URI.isValid('ravencoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?amount=1.2&other=param')
+    URI.isValid('aipgcoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?amount=1.2&other=param')
                 .should.equal(true);
-    URI.isValid('ravencoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?amount=1.2&req-other=param',
+    URI.isValid('aipgcoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?amount=1.2&req-other=param',
                 ['req-other']).should.equal(true);
-    URI.isValid('ravencoin:RDWmJMh9iBvwbvgohRCynzoyP3ojq8st63?amount=0.1&' +
+    URI.isValid('aipgcoin:RDWmJMh9iBvwbvgohRCynzoyP3ojq8st63?amount=0.1&' +
                 'r=https%3A%2F%2Ftest.bitpay.com%2Fi%2F6DKgf8cnJC388irbXk5hHu').should.equal(true);
 
-    URI.isValid('ravencoin:').should.equal(false);
-    URI.isValid('ravencoin:badUri').should.equal(false);
-    URI.isValid('ravencoin:1DP69gMMvSuYhbnxsi4EJEFufUAbDrEQfk?amount=bad').should.equal(false);
-    URI.isValid('ravencoin:1DP69gMMvSuYhbnxsi4EJEFufUAbDrEQfk?amount=1.2&req-other=param')
+    URI.isValid('aipgcoin:').should.equal(false);
+    URI.isValid('aipgcoin:badUri').should.equal(false);
+    URI.isValid('aipgcoin:1DP69gMMvSuYhbnxsi4EJEFufUAbDrEQfk?amount=bad').should.equal(false);
+    URI.isValid('aipgcoin:1DP69gMMvSuYhbnxsi4EJEFufUAbDrEQfk?amount=1.2&req-other=param')
                 .should.equal(false);
-    URI.isValid('ravencoin:?r=https%3A%2F%2Ftest.bitpay.com%2Fi%2F6DKgf8cnJC388irbXk5hHu')
+    URI.isValid('aipgcoin:?r=https%3A%2F%2Ftest.bitpay.com%2Fi%2F6DKgf8cnJC388irbXk5hHu')
                 .should.equal(false);
   });
 
@@ -69,50 +69,50 @@ describe('URI', function() {
   });
 
   it('do not need new keyword', function() {
-    var uri = URI('ravencoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K');
+    var uri = URI('aipgcoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K');
     uri.should.be.instanceof(URI);
   });
 
-  describe('instantiation from ravencoin uri', function() {
+  describe('instantiation from aipgcoin uri', function() {
     /* jshint maxstatements: 25 */
     var uri;
 
     it('parses address', function() {
-      uri = new URI('ravencoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K');
-      uri.address.should.be.instanceof(ravencore.Address);
+      uri = new URI('aipgcoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K');
+      uri.address.should.be.instanceof(aipgcore.Address);
       uri.network.should.equal(Networks.livenet);
     });
 
     it('parses amount', function() {
-      uri = URI.fromString('ravencoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?amount=123.22');
+      uri = URI.fromString('aipgcoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?amount=123.22');
       uri.address.toString().should.equal('R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K');
       uri.amount.should.equal(12322000000);
       expect(uri.otherParam).to.be.undefined();
     });
 
     it('parses a testnet address', function() {
-      uri = new URI('ravencoin:mp5vhtKLjEB2BSJQ5GJ5e399jDDgWpFAmb');
-      uri.address.should.be.instanceof(ravencore.Address);
+      uri = new URI('aipgcoin:mp5vhtKLjEB2BSJQ5GJ5e399jDDgWpFAmb');
+      uri.address.should.be.instanceof(aipgcore.Address);
       uri.network.should.equal(Networks.testnet);
     });
 
     it('stores unknown parameters as "extras"', function() {
-      uri = new URI('ravencoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?amount=1.2&other=param');
-      uri.address.should.be.instanceof(ravencore.Address);
+      uri = new URI('aipgcoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?amount=1.2&other=param');
+      uri.address.should.be.instanceof(aipgcore.Address);
       expect(uri.other).to.be.undefined();
       uri.extras.other.should.equal('param');
     });
 
     it('throws error when a required feature is not supported', function() {
       (function() {
-        return new URI('ravencoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?amount=1.2&other=param&req-required=param');
+        return new URI('aipgcoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?amount=1.2&other=param&req-required=param');
       }).should.throw(Error);
     });
 
     it('has no false negative when checking supported features', function() {
-      uri = new URI('ravencoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?amount=1.2&other=param&' +
+      uri = new URI('aipgcoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?amount=1.2&other=param&' +
                     'req-required=param', ['req-required']);
-      uri.address.should.be.instanceof(ravencore.Address);
+      uri.address.should.be.instanceof(aipgcore.Address);
       uri.amount.should.equal(120000000);
       uri.extras.other.should.equal('param');
       uri.extras['req-required'].should.equal('param');
@@ -127,13 +127,13 @@ describe('URI', function() {
     uri = new URI({
       address: 'R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K'
     });
-    uri.address.should.be.instanceof(ravencore.Address);
+    uri.address.should.be.instanceof(aipgcore.Address);
     uri.network.should.equal(Networks.livenet);
 
     uri = new URI({
       address: 'mp5vhtKLjEB2BSJQ5GJ5e399jDDgWpFAmb'
     });
-    uri.address.should.be.instanceof(ravencore.Address);
+    uri.address.should.be.instanceof(aipgcore.Address);
     uri.network.should.equal(Networks.testnet);
 
     uri = new URI({
@@ -141,7 +141,7 @@ describe('URI', function() {
       amount: 120000000,
       other: 'param'
     });
-    uri.address.should.be.instanceof(ravencore.Address);
+    uri.address.should.be.instanceof(aipgcore.Address);
     uri.amount.should.equal(120000000);
     expect(uri.other).to.be.undefined();
     uri.extras.other.should.equal('param');
@@ -159,19 +159,19 @@ describe('URI', function() {
       other: 'param',
       'req-required': 'param'
     }, ['req-required']);
-    uri.address.should.be.instanceof(ravencore.Address);
+    uri.address.should.be.instanceof(aipgcore.Address);
     uri.amount.should.equal(120000000);
     uri.extras.other.should.equal('param');
     uri.extras['req-required'].should.equal('param');
   });
 
   it('should support double slash scheme', function() {
-    var uri = new URI('ravencoin://R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K');
+    var uri = new URI('aipgcoin://R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K');
     uri.address.toString().should.equal('R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K');
   });
 
   it('should input/output String', function() {
-    var str = 'ravencoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?' +
+    var str = 'aipgcoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?' +
               'message=Donation%20for%20project%20xyz&label=myLabel&other=xD';
     URI.fromString(str).toString().should.equal(str);
   });
@@ -187,12 +187,12 @@ describe('URI', function() {
   });
 
   it('should support numeric amounts', function() {
-    var uri = new URI('ravencoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?amount=12.10001');
+    var uri = new URI('aipgcoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?amount=12.10001');
     expect(uri.amount).to.be.equal(1210001000);
   });
 
   it('should support extra arguments', function() {
-    var uri = new URI('ravencoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?' +
+    var uri = new URI('aipgcoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?' +
                       'message=Donation%20for%20project%20xyz&label=myLabel&other=xD');
 
     should.exist(uri.message);
@@ -209,7 +209,7 @@ describe('URI', function() {
     new URI({
       address: 'R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K',
     }).toString().should.equal(
-      'ravencoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K'
+      'aipgcoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K'
     );
 
     new URI({
@@ -218,27 +218,27 @@ describe('URI', function() {
       message: 'Hello World',
       something: 'else'
     }).toString().should.equal(
-      'ravencoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?amount=1.10001&message=Hello%20World&something=else'
+      'aipgcoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K?amount=1.10001&message=Hello%20World&something=else'
     );
 
   });
 
   it('should be case insensitive to protocol', function() {
-    var uri1 = new URI('rAvEnCoIn:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K');
-    var uri2 = new URI('rAvEnCoIn:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K');
+    var uri1 = new URI('aipgCoIn:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K');
+    var uri2 = new URI('aipgCoIn:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K');
 
     uri1.address.toString().should.equal(uri2.address.toString());
   });
 
   it('writes correctly the "r" parameter on string serialization', function() {
-    var originalString = 'ravencoin:RDWmJMh9iBvwbvgohRCynzoyP3ojq8st63?amount=0.1&' +
+    var originalString = 'aipgcoin:RDWmJMh9iBvwbvgohRCynzoyP3ojq8st63?amount=0.1&' +
                          'r=https%3A%2F%2Ftest.bitpay.com%2Fi%2F6DKgf8cnJC388irbXk5hHu';
     var uri = new URI(originalString);
     uri.toString().should.equal(originalString);
   });
 
   it('displays nicely on the console (#inspect)', function() {
-    var uri = 'ravencoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K';
+    var uri = 'aipgcoin:R9wprka91ffCccLXPTbLpFf8vCoTPTkh4K';
     var instance = new URI(uri);
     instance.inspect().should.equal('<URI: ' + uri + '>');
   });

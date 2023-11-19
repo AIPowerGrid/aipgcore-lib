@@ -4,15 +4,15 @@ var chai = require('chai');
 var should = chai.should();
 var expect = chai.expect;
 
-var ravencore = require('..');
-var BN = ravencore.crypto.BN;
-var Point = ravencore.crypto.Point;
-var PrivateKey = ravencore.PrivateKey;
-var Networks = ravencore.Networks;
-var Base58Check = ravencore.encoding.Base58Check;
+var aipgcore = require('..');
+var BN = aipgcore.crypto.BN;
+var Point = aipgcore.crypto.Point;
+var PrivateKey = aipgcore.PrivateKey;
+var Networks = aipgcore.Networks;
+var Base58Check = aipgcore.encoding.Base58Check;
 
-var validbase58 = require('./data/ravend/base58_keys_valid.json');
-var invalidbase58 = require('./data/ravend/base58_keys_invalid.json');
+var validbase58 = require('./data/aipgd/base58_keys_valid.json');
+var invalidbase58 = require('./data/aipgd/base58_keys_invalid.json');
 
 describe('PrivateKey', function() {
   var hex = '96c132224121b509b7d0a16245e957d9192609c5637c6228311287b1be21627a';
@@ -88,7 +88,7 @@ describe('PrivateKey', function() {
     should.exist(a.bn);
   });
 
-  describe('ravend compliance', function() {
+  describe('aipgd compliance', function() {
     validbase58.map(function(d){
       if (d[2].isPrivkey) {
         it('should instantiate WIF private key ' + d[0] + ' with correct properties', function() {

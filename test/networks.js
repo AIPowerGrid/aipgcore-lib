@@ -2,8 +2,8 @@
 
 var expect = require('chai').expect;
 var should = require('chai').should();
-var ravencore = require('..');
-var networks = ravencore.Networks;
+var aipgcore = require('..');
+var networks = aipgcore.Networks;
 
 describe('Networks', function() {
 
@@ -26,8 +26,8 @@ describe('Networks', function() {
     networks.testnet.networkMagic.should.deep.equal(new Buffer('52564e54', 'hex'));
     networks.testnet.port.should.equal(18767);
     networks.testnet.dnsSeeds.should.deep.equal([
-      'seed-testnet-raven.ravencoin.org',
-      'seed-testnet-raven.bitactivate.com'
+      'seed-testnet-aipg.aipgcoin.org',
+      'seed-testnet-aipg.bitactivate.com'
     ]);
   });
 

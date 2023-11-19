@@ -16,9 +16,9 @@ report
 .DS_Store
 
 
-ravencore.js
-ravencore.min.js
-ravencore.js.sig
-ravencore.min.js.sig
+aipgcore.js
+aipgcore.min.js
+aipgcore.js.sig
+aipgcore.min.js.sig
 tests.js
 package-lock.json

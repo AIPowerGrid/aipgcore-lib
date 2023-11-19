@@ -2,10 +2,10 @@
 
 var should = require('chai').should();
 
-var ravencore = require('../..');
-var errors = ravencore.errors;
-var $ = ravencore.util.preconditions;
-var PrivateKey = ravencore.PrivateKey;
+var aipgcore = require('../..');
+var errors = aipgcore.errors;
+var $ = aipgcore.util.preconditions;
+var PrivateKey = aipgcore.PrivateKey;
 
 describe('preconditions', function() {
 

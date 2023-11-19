@@ -2,22 +2,22 @@
 
 var should = require('chai').should();
 var sinon = require('sinon');
-var ravencore = require('../..');
-var Interpreter = ravencore.Script.Interpreter;
-var Transaction = ravencore.Transaction;
-var PrivateKey = ravencore.PrivateKey;
-var Script = ravencore.Script;
-var BN = ravencore.crypto.BN;
-var BufferWriter = ravencore.encoding.BufferWriter;
-var Opcode = ravencore.Opcode;
+var aipgcore = require('../..');
+var Interpreter = aipgcore.Script.Interpreter;
+var Transaction = aipgcore.Transaction;
+var PrivateKey = aipgcore.PrivateKey;
+var Script = aipgcore.Script;
+var BN = aipgcore.crypto.BN;
+var BufferWriter = aipgcore.encoding.BufferWriter;
+var Opcode = aipgcore.Opcode;
 var _ = require('lodash');
 
-var script_tests = require('../data/ravend/script_tests');
-var tx_valid = require('../data/ravend/tx_valid');
-var tx_invalid = require('../data/ravend/tx_invalid');
+var script_tests = require('../data/aipgd/script_tests');
+var tx_valid = require('../data/aipgd/tx_valid');
+var tx_invalid = require('../data/aipgd/tx_invalid');
 
-//the script string format used in ravend data tests
-Script.fromRavendString = function(str) {
+//the script string format used in aipgd data tests
+Script.fromaipgdString = function(str) {
   var bw = new BufferWriter();
   var tokens = str.split(' ');
   for (var i = 0; i < tokens.length; i++) {
@@ -327,8 +327,8 @@ describe('Interpreter', function() {
 
   var testFixture = function(vector, expected, witness, amount) {
     amount = amount || 0;
-    var scriptSig = Script.fromRavendString(vector[0]);
-    var scriptPubkey = Script.fromRavendString(vector[1]);
+    var scriptSig = Script.fromaipgdString(vector[0]);
+    var scriptPubkey = Script.fromaipgdString(vector[1]);
     var flags = getFlags(vector[2]);
 
     var hashbuf = new Buffer(32);
@@ -362,7 +362,7 @@ describe('Interpreter', function() {
     var verified = interp.verify(scriptSig, scriptPubkey, spendtx, 0, flags, witness, amount);
     verified.should.equal(expected);
   };
-  describe('ravend script evaluation fixtures', function() {
+  describe('aipgd script evaluation fixtures', function() {
 
     var testAllFixtures = function(set) {
       var c = 0;
@@ -398,7 +398,7 @@ describe('Interpreter', function() {
     testAllFixtures(script_tests);
 
   });
-  describe('ravend transaction evaluation fixtures', function() {
+  describe('aipgd transaction evaluation fixtures', function() {
     var test_txs = function(set, expected) {
       var c = 0;
       set.forEach(function(vector) {
@@ -418,9 +418,9 @@ describe('Interpreter', function() {
             var txoutnum = input[1];
             var scriptPubKeyStr = input[2];
             if (txoutnum === -1) {
-              txoutnum = 0xffffffff; //ravend casts -1 to an unsigned int
+              txoutnum = 0xffffffff; //aipgd casts -1 to an unsigned int
             }
-            map[txid + ':' + txoutnum] = Script.fromRavendString(scriptPubKeyStr);
+            map[txid + ':' + txoutnum] = Script.fromaipgdString(scriptPubKeyStr);
           });
 
           var tx = new Transaction(txhex);

@@ -1,18 +1,18 @@
 {
-  "name": "ravencore-lib",
-  "main": "./ravencore-lib.min.js",
+  "name": "aipgcore-lib",
+  "main": "./aipgcore-lib.min.js",
   "version": "1.0.0",
   "homepage": "https://github.com/underdarkskies",
   "authors": [
     "Under"
   ],
-  "description": "A pure, powerful core for your ravencoin project.",
+  "description": "A pure, powerful core for your aipgcoin project.",
   "moduleType": [
     "globals"
   ],
   "keywords": [
-    "ravencoin",
-    "ravencore",
+    "aipgcoin",
+    "aipgcore",
     "rvn",
     "satoshi"
   ],

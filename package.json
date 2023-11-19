@@ -1,7 +1,7 @@
 {
-  "name": "ravencore-lib",
+  "name": "aipgcore-lib",
   "version": "1.0.3",
-  "description": "A pure and powerful JavaScript Ravencoin library.",
+  "description": "A pure and powerful JavaScript aipgcoin library.",
   "author": "Under",
   "main": "index.js",
   "scripts": {
@@ -25,7 +25,7 @@
     }
   ],
   "keywords": [
-    "ravencoin",
+    "aipgcoin",
     "transaction",
     "address",
     "p2p",
@@ -42,7 +42,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/underdarkskies/ravencore-lib.git"
+    "url": "https://github.com/AIPowerGrid/aipgcore-lib.git"
   },
   "browser": {
     "request": "browser-request"
@@ -61,7 +61,7 @@
     "brfs": "^1.2.0",
     "chai": "^1.10.0",
     "gulp": "^3.8.10",
-    "ravencore-build": "github:underdarkskies/ravencore-build",
+    "aipgcore-build": "github:AIPowerGrid/aipgcore-build",
     "sinon": "^1.13.0"
   },
   "license": "MIT"
